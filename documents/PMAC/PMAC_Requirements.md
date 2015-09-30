@@ -16,6 +16,7 @@ an EPICS record interface table.
 1.1 The driver will be based on an Asyn model 3 driver.
    - A type 3 PMAC driver already exists for real axes.
    - The current type 3 driver shall be moved into the PMAC module.
+
 1.2 Each PMAC axis will be made available to the motor record interface.
    - The current type 3 driver already supports individual axes.
 
@@ -25,8 +26,10 @@ an EPICS record interface table.
    - The design shall be taken from the PowerPMAC module.  Implementation will consist of a combination of PowerPMAC and pmacCoord module.
    - Goal is to deprecate pmacCoord, with the functionality migrating over to the PMAC module.
    - Goal is to deprecate pmacUtil, with the functionality migrating over to the PMAC module.
+
 2.2 Each PMAC coordinate system degree of freedom will be made available to the motor record interface.
    - This is implied by implementing pmacCoord as part of the type 3 driver.
+
 2.3 The driver will be able to switch axes into and out of coordinate systems.
    - Giles Knap already has an implementation for this.  The implementation shall be moved into the PMAC module.
 
@@ -34,6 +37,7 @@ an EPICS record interface table.
 
 3.1 The driver will be able to write a PLC or motion program to the PMAC controller.
    - Requires locking mechanism (described below).  Single buffer to accept arbitrary ASCII data for writing to controller.
+
 3.2 The driver will be able to fill a buffer of positions for use by the PMAC controller.
    - Data buffer on PMAC split into blocks
    - Size of overall buffer defined from startup
@@ -41,6 +45,7 @@ an EPICS record interface table.
    - Writing of blocks will attempt to keep as close behind the PMAC current block pointer as possible
    - PMAC will report its current "block" at a high rate
    - Investigation into writing data directly to memory blocks will take place, therefore bypassing the ASCII comms.
+
 3.3 The driver will support the model 3 trajectory interface.
    - The trajectory interface provides the following driver calls
      - initializeProfile
@@ -50,6 +55,7 @@ an EPICS record interface table.
      - abortProfile
      - readbackProfile
    - These methods can be used to supply a set of PVT data to the PMAC, and to control execution of the motion.
+
 3.4 The driver will be able to start, stop, pause and resume complex motion described by motion programs.
    - Interface needs to allow specification of the motion program number, CS number and an arbitrary set of Q variables.
    - Interface code will be very similar to that already defined for trajectory.
@@ -61,12 +67,16 @@ an EPICS record interface table.
 
 4.1 The driver will initiate and provide feedback of complex homing routines.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
+
 4.2 The driver will support deferred moves and deferred coordinated moves for multiple axes.
    - Giles Knap has an implementation of this already working.  This implementation will be included in the PMAC module.
+
 4.3 The driver will support setting and releasing of brakes.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
+
 4.4 The driver will support detection of encoder loss/fault.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
+
 4.5 The driver will support initiation of position compare.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
 
