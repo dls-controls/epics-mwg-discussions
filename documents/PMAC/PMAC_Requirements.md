@@ -11,13 +11,16 @@ an EPICS record interface table.
 
 ### Requirements list
 
-1 General Requirements
+#### 1 General Requirements
+
 1.1 The driver will be based on an Asyn model 3 driver.
    - A type 3 PMAC driver already exists for real axes.
    - The current type 3 driver shall be moved into the PMAC module.
 1.2 Each PMAC axis will be made available to the motor record interface.
    - The current type 3 driver already supports individual axes.
-2 Coordinate Systems
+
+#### 2 Coordinate Systems
+
 2.1 The driver will support PMAC coordinated axes.
    - The design shall be taken from the PowerPMAC module.  Implementation will consist of a combination of PowerPMAC and pmacCoord module.
    - Goal is to deprecate pmacCoord, with the functionality migrating over to the PMAC module.
@@ -26,7 +29,9 @@ an EPICS record interface table.
    - This is implied by implementing pmacCoord as part of the type 3 driver.
 2.3 The driver will be able to switch axes into and out of coordinate systems.
    - Giles Knap already has an implementation for this.  The implementation shall be moved into the PMAC module.
-3 Complex Motion
+
+#### 3 Complex Motion
+
 3.1 The driver will be able to write a PLC or motion program to the PMAC controller.
    - Requires locking mechanism (described below).  Single buffer to accept arbitrary ASCII data for writing to controller.
 3.2 The driver will be able to fill a buffer of positions for use by the PMAC controller.
@@ -51,7 +56,9 @@ an EPICS record interface table.
    - Pete Leicester's functioning raster scan program can be used as the initial goal for this interface.
    - The interface between motion program and driver shall be clearly defined, so that additional motion programs can be
     added without needing to investigate the code within the driver.
-4 Utilities
+
+#### 4 Utilities
+
 4.1 The driver will initiate and provide feedback of complex homing routines.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
 4.2 The driver will support deferred moves and deferred coordinated moves for multiple axes.
@@ -62,7 +69,9 @@ an EPICS record interface table.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
 4.5 The driver will support initiation of position compare.
    - This functionality will be provided by migrating pmacUtil into the PMAC module.
-5 PMAC Locking
+
+#### 5 PMAC Locking
+
 5.1 The drive must offer a locking mechanism for applications that need to download large ASCII (that opens programs, etc).
    - Investigation of results of previous study into the PMAC locking mechanism provided on board.
    - Implementation of a locking program that can sit in front of the PMAC, offering single point locking.
