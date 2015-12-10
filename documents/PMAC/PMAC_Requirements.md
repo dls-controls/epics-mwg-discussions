@@ -96,18 +96,18 @@ The PMAC module will replace the existing tpmac, pmacUtil and pmacCoord modules 
 
 After meeting 10th December, the current design...
 
--One message broker to ensure communications are batched to avoid flooding the PMAC comms.
--One main controller class.
--One child CS1 class.
--One to 15 (CS2 .. CS16) kinematic classes.
--The main controller class comes with 8 motor records representing real axes.  The current CS of each axis can be read out.
--The CS1 class provides straight through 1 to 1 mapping.  It contains a time series array and position arrays.
--Each kinematic class will be set up specifically for a set number of axes, there will exist the corresponding number of virtual motor records.
--Each kinematic class will provide the current inverse and forward kinematic definition (read from the PMAC, at startup).
--Each kinematic class will contain a time series array and position arrays.
--Each kinematic class will provide the Q variable values for the coordinate system.
--Only one CS class (CS1 or kinematic CS2..16) will be able to be trajectory scanned at a time, a switch will be able to turn them on/off (or rejected).
--All motor records will continue to stay active (not disabled) but commands will not be sent down to the PMAC, the classes will take care of this.
+  - One message broker to ensure communications are batched to avoid flooding the PMAC comms.
+  - One main controller class.
+  - One child CS1 class.
+  - One to 15 (CS2 .. CS16) kinematic classes.
+  - The main controller class comes with 8 motor records representing real axes.  The current CS of each axis can be read out.
+  - The CS1 class provides straight through 1 to 1 mapping.  It contains a time series array and position arrays.
+  - Each kinematic class will be set up specifically for a set number of axes, there will exist the corresponding number of virtual motor records.
+  - Each kinematic class will provide the current inverse and forward kinematic definition (read from the PMAC, at startup).
+  - Each kinematic class will contain a time series array and position arrays.
+  - Each kinematic class will provide the Q variable values for the coordinate system.
+  - Only one CS class (CS1 or kinematic CS2..16) will be able to be trajectory scanned at a time, a switch will be able to turn them on/off (or rejected).
+  - All motor records will continue to stay active (not disabled) but commands will not be sent down to the PMAC, the classes will take care of this.
 
 
 
