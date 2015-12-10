@@ -92,11 +92,24 @@ The PMAC module will replace the existing tpmac, pmacUtil and pmacCoord modules 
 
 ![PMAC module high level](https://github.com/dls-controls/epics-mwg-discussions/blob/master/documents/PMAC/PMAC_current.png "PMAC module replaces tpmac, pmacUtil and pmacCoord")
 
-The following steps are written in order of development tasks.
+![PMAC Block diagram](https://github.com/dls-controls/epics-mwg-discussions/blob/master/documents/PMAC/PMACBlockDiagram.png "Current block diagram for design")
 
-* A new module called PMAC is to be created, hosted on dls-controls github.
-* The current type 3 driver present in the DLS tpmac module shall be moved into the PMAC module.
-* Giles Knap's work on switching axes into and out of coordinate systems shall be applied to the PMAC module.
-* A type 3 Coordinate System axes class shall be created, based on the current type 3 Coordinate System axes class present in the powerPMAC module.
+After meeting 10th December, the current design...
+
+-One message broker to ensure communications are batched to avoid flooding the PMAC comms.
+-One main controller class.
+-One child CS1 class.
+-One to 15 (CS2 .. CS16) kinematic classes.
+-The main controller class comes with 8 motor records representing real axes.  The current CS of each axis can be read out.
+-The CS1 class provides straight through 1 to 1 mapping.  It contains a time series array and position arrays.
+-Each kinematic class will be set up specifically for a set number of axes, there will exist the corresponding number of virtual motor records.
+-Each kinematic class will provide the current inverse and forward kinematic definition (read from the PMAC, at startup).
+-Each kinematic class will contain a time series array and position arrays.
+-Each kinematic class will provide the Q variable values for the coordinate system.
+-Only one CS class (CS1 or kinematic CS2..16) will be able to be trajectory scanned at a time, a switch will be able to turn them on/off (or rejected).
+-All motor records will continue to stay active (not disabled) but commands will not be sent down to the PMAC, the classes will take care of this.
+
+
+
 
 
